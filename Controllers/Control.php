@@ -23,7 +23,7 @@ class Control extends Controller
         $comando = $param;
 
         $cadena = array(
-            'imei'=>"867858039011138",
+            'imei'=>"test_humedad",
             'estado' =>0,
             'evento' =>"command tipo 1",
             'comando'=>$comando      
@@ -45,13 +45,13 @@ class Control extends Controller
         $matriz = explode("|", $comando);
 
         $cadena1 = array(
-            'imei'=>"867858039011138",
+            'imei'=>"test_humedad",
             'estado' =>0,
             'evento' =>"command tipo 2",
             'comando'=>$matriz[0]      
         );
         $cadena2 = array(
-            'imei'=>"867858039011138",
+            'imei'=>"test_humedad",
             'estado' =>0,
             'evento' =>"command tipo 2",
             'comando'=>$matriz[1]      
@@ -72,7 +72,7 @@ class Control extends Controller
 
         $text ="viene de afuera".$comando;
         $cadena = array(
-            'imei'=>"867858039011138",
+            'imei'=>"test_humedad",
             //'estado' =>0,
             'evento' =>"command tipo 1",
             'comando'=>$comando      
@@ -94,14 +94,14 @@ class Control extends Controller
         $matriz = explode("|", $comando);
 
         $cadena1 = array(
-            'imei'=>"867858039011138",
+            'imei'=>"test_humedad",
             //'estado' =>0,
             // comando para proceso integral =>command for integral process 
             'evento' =>"command tipo 2",
             'comando'=>$matriz[0]      
         );
         $cadena2 = array(
-            'imei'=>"867858039011138",
+            'imei'=>"test_humedad",
             //'estado' =>0,
             'evento' =>"command tipo 2",
             'comando'=>$matriz[1]      
@@ -264,7 +264,7 @@ class Control extends Controller
                             -147 -3z'/>
                             </g>
                         </svg>
-                        <h5 class='text-uppercase'>Ventilation</h5>
+                        <h5 class='text-uppercase'>Humidity Control</h5>
                         <select class='form-select' id='select_avl_ok' name='select_avl_ok'>
                             <option value='0'>OFF</option>
                             <option value='1'>ON</option>
@@ -273,30 +273,8 @@ class Control extends Controller
 
                     </div>
                 </div>
-                <div class='col-12 col-md-4 col-lg-3 px-2'>
-                    <div class='text-center'>
-                        <svg version='1.0' xmlns='http://www.w3.org/2000/svg' class='icon-params icon px-1 btn' ondblclick='ethyModal()' ontouchstart='ethyModal()' viewBox='0 0 306 236' preserveAspectRatio='xMidYMid meet'>
-                            <g transform='translate(0,236) scale(0.1,-0.1)' stroke='none'>
-                                <path fill='gray' d='M472 2126 c-62 -29 -102 -68 -133 -132 -28 -57 -31 -71 -27 -127 6 -73 25 -114 76 -165 59 -59 105 -77 194 -77 l77 0 40 -63 c23 -34 41 -67 41 -72 0 -5 -24 -33 -54 -63 -80 -80 -99 -123 -104 -238 -4 -87 -2 -101 21 -150 15 -30 51 -78 81 -108 l55 -55 -31 -55 c-46 -83 -50 -86 -126 -87 -84 -2 -143 -27 -199 -85 -53 -56 -73 -103 -73 -176 0 -170 162 -295 326 -254 190 48 258 277 125 424 l-35 39 39 75 39 74 73 -6 c83 -8 158 6 218 40 46 26 121 105 147 153 l17 32 284 0 285 0 47 -64 c51 -70 91 -102 170 -137 48 -22 102 -26 210 -17 27 3 33 -3 73 -70 l44 -72 -46 -51 c-57 -64 -76 -122 -66 -200 8 -61 25 -94 74 -147 50 -55 101 -76 181 -76 80 1 124 16 179 64 177 156 58 450 -181 450 -61 0 -64 1 -90 38 -16 21 -36 54 -46 73 l-18 34 55 59 c72 76 96 139 96 245 0 70 -4 86 -35 149 -22 44 -53 86 -81 111 l-45 39 43 71 43 71 61 0 c86 0 150 25 204 80 130 129 95 333 -72 421 -50 26 -167 26 -223 0 -48 -22 -96 -71 -126 -129 -17 -34 -21 -58 -20 -114 2 -77 14 -109 68 -176 l35 -43 -41 -68 -40 -68 -98 1 c-85 0 -105 -3 -153 -25 -67 -31 -116 -73 -156 -131 -16 -24 -33 -46 -39 -50 -5 -4 -137 -7 -293 -7 -306 1 -296 -1 -326 58 -21 40 -97 106 -152 132 -40 18 -67 23 -147 23 l-98 1 -44 69 -43 69 44 63 c48 71 59 111 51 189 -8 82 -62 165 -130 201 -45 23 -182 29 -225 10z'/>
-                            </g>
-                        </svg>
-                        <h5 class='text-uppercase'>SP Ethylene</h5>
-                        <input id='ethylene_SP_a'  type='hidden' value='{$val->sp_ethyleno}' name='ethylene_SP_a'>
-                        <input id='ethylene_SP' class='text-center' type='text' value='{$val->sp_ethyleno}' name='ethylene_SP'>
-                        <div class='mt-2' id='btnProcesarEthy'></div>
-                    </div>
-                </div>
-                <div class='col-12 col-md-4 col-lg-3 px-2'>
-                    <div class='text-center '>
-                        <svg class='icon-params-co2 icon px-1 btn'>
-                            <use xlink:href='sprite.svg#co2'></use>
-                        </svg>
-                        <h5 class='text-uppercase'>SP CO2</h5>
-                        <input id='co2_SP_a'  type='hidden' value='{$val->set_point_co2}' name='co2_SP_a'>
-                        <input id='co2_SP' class='text-center' type='text' value='{$val->set_point_co2}' name='co2_SP'>
-                        <div class='mt-2' id='btnProcesarCO2'></div>
-                    </div>
-                </div> 
+
+
                 <div class='col-12 col-md-4 col-lg-3 px-2'>
                     <div class='text-center'>
                         <i class='bi bi-thermometer-half icon-params' ></i>
@@ -306,33 +284,7 @@ class Control extends Controller
                         <div class='mt-2' id='btnProcesarTMP'></div>
                     </div>
                 </div>
-                <div class='col-12 col-md-4 col-lg-3 px-2'>
-                    <div class='text-center'>
-                        <svg version='1.0' xmlns='http://www.w3.org/2000/svg' class='icon-params icon px-1' ondblclick='humidityModal()' ontouchstart='humidityModal()' viewBox='0 0 74.000000 74.000000' preserveAspectRatio='xMidYMid meet'>
-                            <g transform='translate(0.000000,74.000000) scale(0.100000,-0.100000)'
-                            fill='#0070fc' stroke='none'>
-                            <path d='M270 635 c-61 -20 -116 -67 -146 -128 -23 -44 -26 -60 -22 -127 4
-                            -96 38 -159 112 -204 54 -34 156 -48 195 -27 26 15 30 57 4 46 -68 -26 -146
-                            -11 -203 41 -134 121 -61 347 116 362 116 10 203 -58 229 -178 9 -40 29 -73
-                            38 -63 14 13 6 90 -14 133 -55 123 -187 185 -309 145z'/>
-                            <path d='M315 551 c-17 -4 -43 -16 -58 -25 -55 -37 -92 -133 -64 -170 19 -26
-                            37 -12 37 30 0 84 57 130 146 119 l53 -6 -33 -30 c-19 -16 -41 -29 -50 -29
-                            -26 0 -50 -45 -36 -69 19 -36 80 -22 80 18 0 9 23 39 52 68 40 40 49 56 41 64
-                            -9 9 -16 9 -28 -1 -10 -8 -15 -9 -15 -2 0 25 -76 45 -125 33z'/>
-                            <path d='M460 465 c-6 -8 -8 -20 -4 -27 5 -7 11 -31 14 -53 3 -27 10 -40 20
-                            -40 21 0 25 67 5 104 -18 36 -18 36 -35 16z'/>
-                            <path d='M516 308 c-65 -103 -69 -122 -36 -175 54 -89 194 -21 161 79 -11 33
-                            -78 148 -87 148 -2 0 -19 -24 -38 -52z m81 -106 c7 -31 -7 -56 -36 -60 -51 -8
-                            -68 53 -29 103 l22 28 18 -23 c10 -12 21 -34 25 -48z'/>
-                            <path d='M530 210 c0 -12 35 -31 44 -23 3 3 -2 12 -12 19 -20 16 -32 17 -32 4z'/>
-                            </g>
-                        </svg>
-                        <h5 class='text-uppercase'>SP Humidity</h5>
-                        <input id='humidity_SP_a'  type='hidden' value='{$val->humidity_set_point}' name='humidity_SP_a'>
-                        <input id='humidity_SP' class='text-center' type='text' value='{$val->humidity_set_point}' name='humidity_SP'>
-                        <div class='mt-2' id='btnProcesarHumidity'></div>
-                    </div>
-                </div>
+
                 <div class='col-12 col-md-4 col-lg-3 px-2'>
                     <div class='text-center'>
                         <svg version='1.0' xmlns='http://www.w3.org/2000/svg'
@@ -362,7 +314,7 @@ class Control extends Controller
                             -10 10 0 6 5 10 10 10 6 0 10 -4 10 -10z'/>
                             </g>
                         </svg>
-                        <h5 class='text-uppercase'>I. Hours</h5>
+                        <h5 class='text-uppercase'>Control Hours</h5>
                         <input id='i_hours_a'  type='hidden' value='{$val->ripener_prueba}' name='i_hours_a'>      
                         <input id='i_hours' class='text-center' type='text' value='{$val->ripener_prueba}' name='i_hours'>
                         <div class='mt-2' id='btnProcesarIHours'></div>

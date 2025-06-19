@@ -397,7 +397,7 @@ function ContenedorMadurador_2($val, $url=0){
                         <div class='card-body'>
                             <i class='ri-notification-3-fill fs-1 text-warning'></i>
                             <div class='d-flex justify-content-center align-items-center gap-1'>
-                                <h5 class='text-uppercase text-warning modal-text'>Alarmas</h5>
+                                <h5 class='text-uppercase text-warning modal-text'>Alarms</h5>
                                 <span class='badge bg-warning text-white fs-6'>0</span>
                             </div>
                         </div>
@@ -408,7 +408,7 @@ function ContenedorMadurador_2($val, $url=0){
                         <div class='card-body'>
                             <i class='ri-error-warning-line fs-1 text-secondary'></i>
                             <div class='d-flex justify-content-center align-items-center gap-1'>
-                                <h5 class='text-uppercase text-secondary modal-text'>Mensajes</h5>
+                                <h5 class='text-uppercase text-secondary modal-text'>Messages</h5>
                                 <span class='badge bg-secondary text-white fs-6'>0</span>
                             </div>
                         </div>
@@ -419,7 +419,7 @@ function ContenedorMadurador_2($val, $url=0){
                         <div class='card-body'>
                             <i class='ri-timer-fill fs-1 text-primary'></i>
                             <div class='d-flex justify-content-center align-items-center gap-1'>
-                                <h5 class='text-uppercase text-primary modal-text'>Horas</h5>
+                                <h5 class='text-uppercase text-primary modal-text'>Hours</h5>
                                 <span class='badge bg-primary text-white fs-6'>0</span>
                             </div>
                         </div>
@@ -433,7 +433,7 @@ function ContenedorMadurador_2($val, $url=0){
                         </div>
                         <div class='d-flex flex-wrap justify-content-center'>
                             <div class='col-12 col-lg-12'>
-                            <h1 class='text-center text-uppercase'> TRANSPORT</h1>
+                            <h1 class='text-center text-uppercase'> REEFER</h1>
                             <div class='d-flex flex-wrap justify-content-center align-items-center gap-2'>
                                 <h3 class='fw-bold text-center'>{$val->nombre_contenedor}</h3>
                                 <h3 class='fw-bold text-center {$colorEstado}' id='estadoEquipo'>({$estado})</h3>
@@ -505,33 +505,84 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>Set Point</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='set_point_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label class='fw-bold value_icon value_params' id='set_point_{$val->telemetria_id}'>{$s_temp} F°</label>
+                                <label class='fw-bold value_icon value_params' id='set_point_{$val->telemetria_id}'>{$s_temp} F°xx</label>
                             </div>
                         </div>
                     </div>
                     <div class='col-6 col-lg-3 border-top'>
                         <div class='text-center'>
-                            <svg width='60' height='60' class='icon-params-co2 icon px-1 btn'>
-                                <use xlink:href='sprite.svg#co2'></use>
+                          <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='60' height='60' class='text-secondary' viewBox='0 0 262.000000 262.000000' preserveAspectRatio='xMidYMid meet'>
+                            <g transform='translate(0.000000,262.000000) scale(0.100000,-0.100000)'
+                            fill='#000000' stroke='none'>
+                            <path d='M1150 2180 c-187 -28 -376 -144 -496 -303 -78 -104 -133 -234 -106 -251 13 -8 26 10 47 68 21 55 79 148 132 212 78 92 226 184 358 220 153 41 386 23 431 -34 19 -23 25 -25 50 -17 19 7 30 19 32 33 5 36 -15 52 -67 51 -25
+                            -1 -59 4 -75 10 -38 15 -235 22 -306 11z'/>
+                            <path d='M1690 1984 c-6 -14 -10 -32 -10 -40 0 -27 -19 -51 -49 -64 -28 -11 -33 -10 -71 20 l-42 33 -58 -58 -58 -57 30 -44 c27 -41 28 -46 17 -79 -11 -30
+                            -19 -35 -63 -45 -28 -6 -54 -16 -58 -23 -10 -16 -10 -118 0 -134 4 -7 30 -17 58 -23 45 -10 52 -15 63 -46 12 -33 11 -38 -13 -73 -14 -20 -26 -41 -26 -47 0
+                            -5 24 -33 53 -62 l53 -53 43 32 44 31 35 -19 c31 -16 38 -26 47 -68 l10 -50
+                            74 0 c81 0 86 3 96 68 5 31 12 40 41 52 35 14 37 14 80 -16 l44 -30 58 55 57
+                            55 -32 45 c-31 44 -32 47 -18 80 15 36 23 40 88 52 l38 6 -3 76 c-3 82 0 79
+                            -80 96 -20 5 -32 17 -43 42 -15 35 -14 37 15 74 17 21 30 42 30 47 0 13 -94
+                            103 -108 103 -7 0 -30 -11 -51 -25 -36 -24 -39 -25 -73 -11 -38 16 -48 32 -48
+                            75 0 42 -17 51 -92 51 -64 0 -69 -2 -78 -26z m130 -33 c5 -11 10 -31 10 -45 0
+                            -28 22 -46 82 -67 34 -12 40 -11 76 14 l39 26 32 -33 31 -32 -25 -36 c-30 -45
+                            -30 -41 -4 -104 20 -48 24 -52 68 -60 l46 -9 0 -44 0 -45 -48 -10 c-51 -11
+                            -55 -17 -84 -109 -3 -10 6 -32 22 -53 l27 -36 -28 -29 c-34 -35 -40 -36 -83
+                            -6 l-34 23 -56 -22 c-43 -18 -57 -28 -59 -46 -8 -68 -9 -69 -60 -66 -38 2 -47
+                            7 -50 23 -9 60 -13 66 -68 90 l-56 25 -32 -25 c-41 -32 -46 -31 -80 4 l-28 29
+                            26 40 25 41 -24 54 c-25 57 -38 67 -86 67 -28 0 -29 1 -29 49 l0 50 46 7 c44
+                            6 46 9 70 62 l24 55 -25 37 c-32 46 -31 53 6 84 l30 26 35 -27 35 -26 52 18
+                            c59 20 77 38 77 75 0 35 17 50 57 50 22 0 36 -6 43 -19z'/>
+                            <path d='M1685 1708 c-78 -45 -107 -154 -62 -233 33 -58 88 -87 160 -82 98 6
+                            157 69 157 167 0 98 -59 161 -157 167 -47 3 -66 -1 -98 -19z m177 -54 c58 -57
+                            58 -132 -1 -188 -80 -77 -221 -17 -221 92 0 62 33 105 97 127 45 16 86 5 125
+                            -31z'/>
+                            <path d='M834 1612 c-6 -4 -15 -34 -20 -66 -9 -59 -9 -60 -56 -79 l-48 -19
+                            -48 31 c-27 17 -55 31 -62 31 -14 0 -106 -85 -121 -113 -8 -14 -2 -29 27 -68
+                            l36 -50 -19 -47 c-19 -46 -21 -47 -84 -62 l-64 -16 -3 -85 c-3 -100 0 -105 77
+                            -116 51 -8 53 -10 73 -56 l21 -48 -38 -55 -38 -55 66 -67 c52 -51 70 -65 82
+                            -57 7 6 31 22 52 37 l39 28 49 -19 c47 -18 50 -22 58 -62 17 -98 7 -89 105
+                            -89 98 0 112 7 112 56 0 57 15 79 64 98 l46 18 49 -36 c27 -20 53 -36 58 -36
+                            6 0 38 29 72 65 l63 65 -36 50 c-20 28 -36 54 -36 59 0 5 9 29 19 54 18 42 21
+                            44 71 50 77 9 81 16 78 116 l-3 86 -67 14 c-38 8 -68 18 -68 23 0 5 -8 26 -19
+                            48 l-18 39 27 33 c56 68 56 68 -13 136 -35 34 -68 62 -75 62 -8 0 -33 -13 -57
+                            -30 -51 -35 -48 -35 -102 -13 -43 18 -53 38 -53 104 0 18 -7 32 -19 39 -22 11
+                            -160 14 -177 2z m161 -89 c4 -27 8 -53 10 -59 1 -5 32 -23 69 -38 l65 -28 53
+                            36 53 35 38 -36 c20 -21 37 -45 37 -54 0 -9 -13 -33 -30 -54 -35 -45 -35 -43
+                            -11 -97 11 -24 22 -51 25 -61 6 -20 14 -23 79 -32 l47 -6 0 -64 c0 -70 10 -62
+                            -88 -80 -24 -5 -33 -16 -56 -75 l-27 -69 31 -42 c16 -23 30 -47 30 -53 0 -7
+                            -18 -29 -40 -51 l-39 -38 -51 35 -51 36 -57 -25 c-78 -35 -79 -36 -87 -98 l-6
+                            -55 -64 0 c-63 0 -63 0 -69 30 -3 17 -9 44 -12 61 -5 24 -14 34 -42 45 -21 8
+                            -50 22 -65 30 -27 15 -29 14 -79 -21 l-51 -37 -43 44 -44 43 35 52 c33 49 34
+                            53 20 80 -8 15 -21 45 -29 65 -13 34 -18 37 -75 49 l-61 12 0 58 c0 32 4 61
+                            10 64 5 3 33 9 61 12 48 6 52 9 65 42 8 20 21 49 30 65 15 28 14 31 -22 83
+                            l-37 54 44 45 45 45 46 -36 c26 -19 50 -35 55 -35 4 0 36 12 69 26 l62 26 11
+                            59 12 59 64 0 64 0 6 -47z'/>
+                            <path d='M870 1281 c-175 -53 -228 -256 -99 -378 185 -175 464 41 348 269 -42
+                            83 -162 135 -249 109z m138 -55 c58 -30 102 -104 102 -168 0 -18 -13 -55 -28
+                            -83 -45 -83 -141 -116 -229 -80 -48 20 -71 41 -94 87 -38 75 -20 158 50 221
+                            39 35 45 37 107 37 36 0 77 -6 92 -14z'/>
+                            <path d='M2215 1088 c-2 -7 -13 -47 -26 -88 -29 -98 -60 -159 -126 -247 -86
+                            -115 -243 -219 -389 -258 -132 -36 -372 -27 -394 15 -22 41 -90 22 -90 -24 0
+                            -36 25 -52 62 -38 22 8 37 8 56 0 16 -7 90 -11 177 -11 144 0 154 1 240 32
+                            211 76 354 201 450 391 40 80 79 205 71 227 -7 16 -25 17 -31 1z'/>
+                            </g>
                             </svg>
-                            <h4 class='text-uppercase text_params'>CO2</h4>
+                            <h4 class='text-uppercase text_params'>Humidity Control </h4>
                             <div class='d-flex justify-content-center align-content-center'>
-                                <p class='value-icon' id='co2_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='co2' class='fw-bold value_icon value_params {$co2_color}' id='co2_{$val->telemetria_id}'>{$co2_pr} %</label>
+                                <p class='value-icon' id='c_mode_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
+
+                                <label for='co2' class='fw-bold value_icon value_params {$co2_color}' id='humidity_control{$val->telemetria_id}'>{$val->humidity_control}</label>
                             </div>
                         </div>
                     </div>
                     <div class='col-6 col-lg-3 border-top'>
                         <div class='text-center'>
-                            <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='60' height='60' class='icon-params icon px-1 btn' viewBox='0 0 306 236' preserveAspectRatio='xMidYMid meet'>
-                                <g transform='translate(0,236) scale(0.1,-0.1)' stroke='none'>
-                                    <path fill='gray' d='M472 2126 c-62 -29 -102 -68 -133 -132 -28 -57 -31 -71 -27 -127 6 -73 25 -114 76 -165 59 -59 105 -77 194 -77 l77 0 40 -63 c23 -34 41 -67 41 -72 0 -5 -24 -33 -54 -63 -80 -80 -99 -123 -104 -238 -4 -87 -2 -101 21 -150 15 -30 51 -78 81 -108 l55 -55 -31 -55 c-46 -83 -50 -86 -126 -87 -84 -2 -143 -27 -199 -85 -53 -56 -73 -103 -73 -176 0 -170 162 -295 326 -254 190 48 258 277 125 424 l-35 39 39 75 39 74 73 -6 c83 -8 158 6 218 40 46 26 121 105 147 153 l17 32 284 0 285 0 47 -64 c51 -70 91 -102 170 -137 48 -22 102 -26 210 -17 27 3 33 -3 73 -70 l44 -72 -46 -51 c-57 -64 -76 -122 -66 -200 8 -61 25 -94 74 -147 50 -55 101 -76 181 -76 80 1 124 16 179 64 177 156 58 450 -181 450 -61 0 -64 1 -90 38 -16 21 -36 54 -46 73 l-18 34 55 59 c72 76 96 139 96 245 0 70 -4 86 -35 149 -22 44 -53 86 -81 111 l-45 39 43 71 43 71 61 0 c86 0 150 25 204 80 130 129 95 333 -72 421 -50 26 -167 26 -223 0 -48 -22 -96 -71 -126 -129 -17 -34 -21 -58 -20 -114 2 -77 14 -109 68 -176 l35 -43 -41 -68 -40 -68 -98 1 c-85 0 -105 -3 -153 -25 -67 -31 -116 -73 -156 -131 -16 -24 -33 -46 -39 -50 -5 -4 -137 -7 -293 -7 -306 1 -296 -1 -326 58 -21 40 -97 106 -152 132 -40 18 -67 23 -147 23 l-98 1 -44 69 -43 69 44 63 c48 71 59 111 51 189 -8 82 -62 165 -130 201 -45 23 -182 29 -225 10z'/>
-                                </g>
-                            </svg>
-                            <h4 class='text-uppercase text_params'>Metano</h4>
+                                 <i class='bi bi-thermometer fs-1'></i>
+                            <h4 class='text-uppercase text_params'>Set Humidity</h4>
                             <div class='d-flex justify-content-center align-content-center'>
+
                                 <p class='value-icon' id='eti_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='ethylene' class='fw-bold value_params value_icon {$etileno_color}' id='ethyleno_{$val->telemetria_id}'>{$ethylene_f} ppm</label>
+                                <label for='ethylene' class='fw-bold value_params value_icon {$etileno_color}' id='humidity_set_point{$val->telemetria_id}'>{$val->humidity_set_point} </label>
                             </div>
                         </div>
                     </div>
@@ -592,10 +643,10 @@ function ContenedorMadurador_2($val, $url=0){
                                 -147 -3z'/>
                                 </g>
                             </svg>
-                            <h4 class='text-uppercase text_params'>AVL</h4>
+                            <h4 class='text-uppercase text_params'>Capacity Load</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='avl_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='avl' class='fw-bold value_params value_icon' id='avl_{$val->telemetria_id}'>{$val->avl} CFM</label>
+                                <label for='avl' class='fw-bold value_params value_icon' id='capacity_load_{$val->telemetria_id}'>{$val->capacity_load} %</label>
                             </div>
                         </div>
                     </div>

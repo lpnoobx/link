@@ -489,19 +489,19 @@ function tarjeta(res){
     }else{
         $('#co2_'+res.telemetria_id).text('NA %');
     }
-    $('#supply_'+res.telemetria_id).text(res.temp_supply_1+"C°");
-    $('#return_'+res.telemetria_id).text(res.return_air+"C°");
+    $('#supply_'+res.telemetria_id).text(res.temp_supply_1+"F°");
+    $('#return_'+res.telemetria_id).text(res.return_air+"F°");
     $('#humidity_'+res.telemetria_id).text(res.relative_humidity+"%");
     $('#i_hours_'+res.telemetria_id).text(res.ripener_prueba);
     $('#avl_'+res.telemetria_id).text(res.avl+"CFM");
-    $('#compressor_'+res.telemetria_id).text(res.compress_coil_1+"C°");
-    $('#evaporator_'+res.telemetria_id).text(res.evaporation_coil+"C°");
-    $('#ambient_air_'+res.telemetria_id).text(res.ambient_air+"C°");
+    $('#compressor_'+res.telemetria_id).text(res.compress_coil_1+"F°");
+    $('#evaporator_'+res.telemetria_id).text(res.evaporation_coil+"F°");
+    $('#ambient_air_'+res.telemetria_id).text(res.ambient_air+"F°");
     $('#pwd_'+res.telemetria_id).text(res.defrost_prueba);
     $('#proceso_'+res.telemetria_id).text(res.stateProcess);
     $('#c_mode_'+res.telemetria_id).text(res.controlling_mode);
-    $('#usda_1_'+res.telemetria_id).text(res.cargo_1_temp+"C°");
-    $('#usda_2_'+res.telemetria_id).text(res.cargo_2_temp+"C°");
+    $('#usda_1_'+res.telemetria_id).text(res.cargo_1_temp+"F°");
+    $('#usda_2_'+res.telemetria_id).text(res.cargo_2_temp+"F°");
     
     /*
     $('#temp1_'+res.telemetria_id).text(res.temp_supply_1);
