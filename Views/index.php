@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="<?php echo base_url; ?>Assets/css/fonts/remixicon.css" />
     <!--<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>-->
     <!--<link href='<?php echo base_url.'Assets'; ?>/css/boxicons.min.css' rel='stylesheet'>-->
-    <title>Bienvenido a mi Formulario</title>
+    <title>Welcome to ZTRACK</title>
 </head>
 <body>
     <div class="container-form sign-up">
