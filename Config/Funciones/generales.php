@@ -505,7 +505,7 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>Set Point</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='set_point_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label class='fw-bold value_icon value_params' id='set_point_{$val->telemetria_id}'>{$s_temp} F°xx</label>
+                                <label class='fw-bold value_icon value_params' id='set_point_{$val->telemetria_id}'>{$s_temp} F°</label>
                             </div>
                         </div>
                     </div>

@@ -17,13 +17,302 @@ class Control extends Controller
         $this->views->getView($this, "index");
 
     }
+    public function ProcesarModal($param){
+        $dataControl="";
+        if($param!=""){
+            $matriz = explode("|", $param);
+            $text1 = validarModal($matriz);
+            //$testComandos =  $this->model->ComandosTest("868428046606400");
+            $testComandos =  $this->model->ComandosOficial("868428046606400");
+            $text_comanos =comandos_pendientes($testComandos);
+            $text1 =$text1.$text_comanos; 
+            $dataControl =array(
+                "data"=>$text1,
+                "matriz"=>$matriz,
+                "comandos"=>$testComandos
+            );
+        }
+        echo json_encode($dataControl, JSON_UNESCAPED_UNICODE);
+    }
+    //    trama = "Trama_Writeout(4,"+SP_Setpoint+",100)"
+    //cambiar humedad
+    public function ComandoHumedad($param){
+        // "Trama_Writeout(0,"+fato_f+",100)"
+        $dataControl="";
+        if($param!=""){
+                $comando = $param;
+                $coman = "1X04,UNIT111,HEAD:1&(4,".$param.",100)&,12341X02";
+                #$coman ="Trama_Writeout(4,".$param.",100)";
+                $event ="Humidity level change to ".$comando." %";
+                $dato=$comando;
+                $tipo =6 ;
+
+            $cadena = array(
+                'imei'=>"868428046606400",
+                //'estado' =>3,
+                'user'=>"dexterity",
+                'tipo'=>$tipo,
+                'dato'=>$dato,
+                'evento' =>$event,
+                'comando'=>$coman      
+            );
+            $dataControl =  $this->model->EnvioComando($cadena);
+            $dataControl =array(
+                "data"=>$dataControl,
+                "mensaje"=>"loading ".$event
+            );
+        }
+        echo json_encode($dataControl, JSON_UNESCAPED_UNICODE);
+    }
+    //    trama = "Temporizadores(0,"+SP_Setpoint+","+sp_sp_ethy1+")";
+    public function ComandoHoras($param){
+        // "Trama_Writeout(0,"+fato_f+",100)"
+        $dataControl="";
+        if($param!=""){
+                $comando1 = $param;
+                $comando = explode("|", $comando1);;
+                $coman ="Temporizadores(0,".$comando[0].",".$comando[1].")";
+                $event ="is being programmed to ".$comando[0]." hours";
+                $dato=$comando[0];
+                $tipo =5 ;
+            $cadena = array(
+                'imei'=>"868428046606400",
+                //'estado' =>3,
+                'user'=>"dexterity",
+                'tipo'=>$tipo,
+                'dato'=>$dato,
+                'evento' =>$event,
+                'comando'=>$coman      
+            );
+            $dataControl =  $this->model->EnvioComando($cadena);
+            $dataControl =array(
+                "data"=>$dataControl,
+                "mensaje"=>"loading ".$event
+            );
+        }
+        echo json_encode($dataControl, JSON_UNESCAPED_UNICODE);
+    }
+    //DefrostOK
+    public function DefrostOK($param){
+        //trama = "Trama_Writeout(21,0,0)";
+        $dataControl="";
+        if($param!=""){
+                $comando = $param;
+                //$coman ="Trama_Writeout(21,0,0)";
+                $coman = "1X04,UNIT111,HEAD:1&(21,0,0)&,12341X02";
+
+                $event =" ACTIVE DEFROST MODE";
+                $dato=0;
+                $tipo =0;
+            $cadena = array(
+                'imei'=>"868428046606400",
+                //'estado' =>3,
+                'user'=>"dexterity",
+                'tipo'=>$tipo,
+                'dato'=>$dato,
+                'evento' =>$event,
+                'comando'=>$coman      
+            );
+            $dataControl =  $this->model->EnvioComando($cadena);
+            $dataControl =array(
+                "data"=>$dataControl,
+                "mensaje"=>"loading ".$event
+            );
+        }
+        echo json_encode($dataControl, JSON_UNESCAPED_UNICODE);
+    }
+    //AVLOK
+    public function AVLOK($param){
+        //trama = "Trama_Writeout(21,0,0)";
+        $dataControl="";
+        if($param!=""){
+            if($param=="NO"){
+                $event ="CLOSING VENTILATION ";
+                $cadena = array(
+                    'imei'=>"868428046606400",
+                    //'estado' =>3,
+                    'user'=>"dexterity",
+                    'tipo'=>12,
+                    'dato'=>0,
+                    'evento' =>$event,
+                    'comando'=>"Trama_Writeout(9,0,1)"      
+                );
+                $dataControl =  $this->model->EnvioComando($cadena);
+            }else{
+                $event =" ACTIVATING FULL VENTILATION ";
+                $cadena = array(
+                    'imei'=>"868428046606400",
+                    //'estado' =>3,
+                    'user'=>"dexterity",
+                    'tipo'=>12,
+                    'dato'=>1,
+                    'evento' =>"ACTIVATE VENTILATION",
+                    'comando'=>"Trama_Writeout(9,1,1)"      
+                );
+                $cadena1 = array(
+                    'imei'=>"868428046606400",
+                    //'estado' =>3,
+                    'user'=>"dexterity",
+                    'tipo'=>9,
+                    'dato'=>200,
+                    'evento' =>$event,
+                    'comando'=>"Trama_Writeout(5,200,1)"      
+                );
+                $dataControl1 =  $this->model->EnvioComando($cadena);
+                sleep(1);
+                $dataControl = $this->model->EnvioComando_libre($cadena1);
+            }
+            $dataControl =array(
+                "data"=>$dataControl,
+                "mensaje"=>"loading ".$event
+            );
+        }
+        echo json_encode($dataControl, JSON_UNESCAPED_UNICODE);
+    }
+    //cambiar temperatura 
+    public function ComandoTemperatura($param){
+        // "Trama_Writeout(0,"+fato_f+",100)"
+        $dataControl="";
+        if($param!=""){
+            
+                $comando = $param;
+                #estructura 
+                # 1X04,UNIT111,HEAD:1&(0,23.8,100)&,12341X02
+                $coman = "1X04,UNIT111,HEAD:1&(0,".pasar_celcius($comando).",100)&,12341X02";
+                #$coman = "Trama_Writeout(0,".pasar_celcius($comando).",100)";
+                $event ="Temperature level change to ".$comando." F°";
+                $dato=pasar_celcius($comando);
+                $tipo =7 ;
+            $cadena = array(
+                'imei'=>"868428046606400",
+                //'estado' =>3,
+                'user'=>"dexterity",
+                'tipo'=>$tipo,
+                'dato'=>$dato,
+                'evento' =>$event,
+                'comando'=>$coman      
+            );
+            $dataControl =  $this->model->EnvioComando($cadena);
+            $dataControl =array(
+                "data"=>$dataControl,
+                "mensaje"=>"loading ".$event
+            );
+            
+        }
+        echo json_encode($dataControl, JSON_UNESCAPED_UNICODE);
+    }
+
+    //COMANDO DE CO2
+    public function CO2Comando($param){
+        //trama = "Trama_Writeout(3,"+SP_Setpoint+",100)";
+        //trama2 ="Trama_Writeout(9,2,1)";
+        if($param!=""){
+        $comando = $param;
+        $matriz = explode("|", $comando);
+        $coman = "Trama_Writeout(3,".$comando.",100)";
+        $event ="co2 limit level change to ".$comando." %";
+        $dato=$comando;
+        $tipo =3 ;
+        $cadena1 = array(
+            'imei'=>"868428046606400",
+            //'estado' =>3,
+            'user'=>"dexterity",
+            'tipo'=>12,
+            'dato'=>2,
+            'evento' =>"activating afamplus process",
+            'comando'=>"Trama_Writeout(9,2,1)"    
+        );
+        $cadena2 = array(
+            'imei'=>"868428046606400",
+            //'estado' =>3,
+            'user'=>"dexterity",
+            'tipo'=>$tipo,
+            'dato'=>$dato,
+            'evento' =>$event,
+            'comando'=>$coman      
+        );
+        $dataControl = $this->model->EnvioComando_libre($cadena1);
+        sleep(1);
+        $dataControl1 = $this->model->EnvioComando_libre($cadena2);
+        $dataControl1 =array(
+            "data"=>$dataControl1,
+            "mensaje"=>"loading ".$event
+            );
+        }
+        echo json_encode($dataControl1, JSON_UNESCAPED_UNICODE);
+    }
+    //ComandoEthy
+    public function ComandoEthy($param){
+        $dataControl="";
+        if($param!=""){
+                $comando = $param;
+                $coman = "SP_ETILENO(".$comando .")";
+                $event ="ethylene level change to ".$comando." ppm";
+                $dato=$comando;
+                $tipo =4 ;
+
+            $cadena = array(
+                'imei'=>"868428046606400",
+                //'estado' =>3,
+                'user'=>"dexterity",
+                'tipo'=>$tipo,
+                'dato'=>$dato,
+                'evento' =>$event,
+                'comando'=>$coman      
+            );
+            $dataControl =  $this->model->EnvioComando($cadena);
+            $dataControl =array(
+                "data"=>$dataControl,
+                "mensaje"=>"loading ".$event
+            );
+        }
+        echo json_encode($dataControl, JSON_UNESCAPED_UNICODE);
+    }
+    public function ComandoPower($param){
+        $dataControl="";
+        if($param!=""){
+            $comando = $param;
+            if($comando=="ON"){
+                //$coman = "Trama_Writeout(29,1,1)";
+                $coman = "1X04,UNIT111,HEAD:1&(29,1,1)&,12341X02";
+
+                $event ="turn on the reefer machine";
+                $dato=1;
+                $tipo =1 ;
+            }else {
+                //$coman = "Trama_Writeout(29,0,1)";
+                $coman = "1X04,UNIT111,HEAD:1&(29,0,1)&,12341X02";
+
+                $event ="reefer machine shutdown";
+                $dato=0;
+                $tipo =2 ;
+            }
+            $cadena = array(
+                'imei'=>"868428046606400",
+                //'estado' =>3,
+                'user'=>"dexterity",
+                'tipo'=>$tipo,
+                'dato'=>$dato,
+                // comando para proceso integral =>command for integral process 
+                'evento' =>$event,
+                'comando'=>$coman      
+            );
+            $dataControl =  $this->model->EnvioComando($cadena);
+            $dataControl =array(
+                "data"=>$dataControl,
+                "mensaje"=>"loading ".$event
+            );
+        }
+        echo json_encode($dataControl, JSON_UNESCAPED_UNICODE);
+
+    }
     //ComandoTest
     public function ComandoTest($param){
         if($param!=""){
         $comando = $param;
 
         $cadena = array(
-            'imei'=>"test_humedad",
+            'imei'=>"868428046606400",
             'estado' =>0,
             'evento' =>"command tipo 1",
             'comando'=>$comando      
@@ -45,13 +334,13 @@ class Control extends Controller
         $matriz = explode("|", $comando);
 
         $cadena1 = array(
-            'imei'=>"test_humedad",
+            'imei'=>"868428046606400",
             'estado' =>0,
             'evento' =>"command tipo 2",
             'comando'=>$matriz[0]      
         );
         $cadena2 = array(
-            'imei'=>"test_humedad",
+            'imei'=>"868428046606400",
             'estado' =>0,
             'evento' =>"command tipo 2",
             'comando'=>$matriz[1]      
@@ -72,7 +361,7 @@ class Control extends Controller
 
         $text ="viene de afuera".$comando;
         $cadena = array(
-            'imei'=>"test_humedad",
+            'imei'=>"868428046606400",
             //'estado' =>0,
             'evento' =>"command tipo 1",
             'comando'=>$comando      
@@ -94,14 +383,14 @@ class Control extends Controller
         $matriz = explode("|", $comando);
 
         $cadena1 = array(
-            'imei'=>"test_humedad",
+            'imei'=>"868428046606400",
             //'estado' =>0,
             // comando para proceso integral =>command for integral process 
             'evento' =>"command tipo 2",
             'comando'=>$matriz[0]      
         );
         $cadena2 = array(
-            'imei'=>"test_humedad",
+            'imei'=>"868428046606400",
             //'estado' =>0,
             'evento' =>"command tipo 2",
             'comando'=>$matriz[1]      
@@ -116,9 +405,6 @@ class Control extends Controller
 
     }
 
-
-
-    //}
     public function LiveData()
     {
         // aqui debe llegar todo los datos si es user 1 sino de acuedo a loq ue esta permitido 
@@ -264,7 +550,7 @@ class Control extends Controller
                             -147 -3z'/>
                             </g>
                         </svg>
-                        <h5 class='text-uppercase'>Humidity Control</h5>
+                        <h5 class='text-uppercase'>Control</h5>
                         <select class='form-select' id='select_avl_ok' name='select_avl_ok'>
                             <option value='0'>OFF</option>
                             <option value='1'>ON</option>
@@ -284,7 +570,33 @@ class Control extends Controller
                         <div class='mt-2' id='btnProcesarTMP'></div>
                     </div>
                 </div>
-
+                <div class='col-12 col-md-4 col-lg-3 px-2'>
+                    <div class='text-center'>
+                        <svg version='1.0' xmlns='http://www.w3.org/2000/svg' class='icon-params icon px-1' ondblclick='humidityModal()' ontouchstart='humidityModal()' viewBox='0 0 74.000000 74.000000' preserveAspectRatio='xMidYMid meet'>
+                            <g transform='translate(0.000000,74.000000) scale(0.100000,-0.100000)'
+                            fill='#0070fc' stroke='none'>
+                            <path d='M270 635 c-61 -20 -116 -67 -146 -128 -23 -44 -26 -60 -22 -127 4
+                            -96 38 -159 112 -204 54 -34 156 -48 195 -27 26 15 30 57 4 46 -68 -26 -146
+                            -11 -203 41 -134 121 -61 347 116 362 116 10 203 -58 229 -178 9 -40 29 -73
+                            38 -63 14 13 6 90 -14 133 -55 123 -187 185 -309 145z'/>
+                            <path d='M315 551 c-17 -4 -43 -16 -58 -25 -55 -37 -92 -133 -64 -170 19 -26
+                            37 -12 37 30 0 84 57 130 146 119 l53 -6 -33 -30 c-19 -16 -41 -29 -50 -29
+                            -26 0 -50 -45 -36 -69 19 -36 80 -22 80 18 0 9 23 39 52 68 40 40 49 56 41 64
+                            -9 9 -16 9 -28 -1 -10 -8 -15 -9 -15 -2 0 25 -76 45 -125 33z'/>
+                            <path d='M460 465 c-6 -8 -8 -20 -4 -27 5 -7 11 -31 14 -53 3 -27 10 -40 20
+                            -40 21 0 25 67 5 104 -18 36 -18 36 -35 16z'/>
+                            <path d='M516 308 c-65 -103 -69 -122 -36 -175 54 -89 194 -21 161 79 -11 33
+                            -78 148 -87 148 -2 0 -19 -24 -38 -52z m81 -106 c7 -31 -7 -56 -36 -60 -51 -8
+                            -68 53 -29 103 l22 28 18 -23 c10 -12 21 -34 25 -48z'/>
+                            <path d='M530 210 c0 -12 35 -31 44 -23 3 3 -2 12 -12 19 -20 16 -32 17 -32 4z'/>
+                            </g>
+                        </svg>
+                        <h5 class='text-uppercase'>SP Humidity</h5>
+                        <input id='humidity_SP_a'  type='hidden' value='{$val->humidity_set_point}' name='humidity_SP_a'>
+                        <input id='humidity_SP' class='text-center' type='text' value='{$val->humidity_set_point}' name='humidity_SP'>
+                        <div class='mt-2' id='btnProcesarHumidity'></div>
+                    </div>
+                </div>
                 <div class='col-12 col-md-4 col-lg-3 px-2'>
                     <div class='text-center'>
                         <svg version='1.0' xmlns='http://www.w3.org/2000/svg'
@@ -314,7 +626,7 @@ class Control extends Controller
                             -10 10 0 6 5 10 10 10 6 0 10 -4 10 -10z'/>
                             </g>
                         </svg>
-                        <h5 class='text-uppercase'>Control Hours</h5>
+                        <h5 class='text-uppercase'>I. Hours</h5>
                         <input id='i_hours_a'  type='hidden' value='{$val->ripener_prueba}' name='i_hours_a'>      
                         <input id='i_hours' class='text-center' type='text' value='{$val->ripener_prueba}' name='i_hours'>
                         <div class='mt-2' id='btnProcesarIHours'></div>
@@ -367,8 +679,6 @@ class Control extends Controller
         echo json_encode($data1, JSON_UNESCAPED_UNICODE);
         die();
         
-    }
-
-    
+    }  
 }
 

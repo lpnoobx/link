@@ -16,9 +16,6 @@ function power_c(data=0){
     return res;
 }
 //select_power="";
-
-
-
 spTemperatureInput = [];
 spEthyleneInput = [];
 spCO2Input = [];
@@ -26,8 +23,6 @@ spHumidityInput = [];
 spIHoursInput = [];
 elpower_state = [];
 elavl = [];
-
-
 
 function alertas(msg, icono) {
     Swal.fire({
@@ -40,21 +35,22 @@ function alertas(msg, icono) {
 }
 function roundToDecimal(number, decimals) {
     // Redondea el número a la cantidad deseada de decimales
-    let roundedNumber = number.toFixed(decimals);
-    
+    let roundedNumber = number.toFixed(decimals); 
     // Reemplaza la coma con punto (si es necesario)
     return roundedNumber.replace(',', '.');
 }
 
-
 let contenidoControl = document.getElementById('contenidoControl');
 // FUNCIONES PARA ABRIR MODALES EN VISTA CONTROL
-function procesarTmp(){
+async function procesarTmp(){
     //aqui enviar los datos al modal
     valor_anterior = parseInt($("#tmp_SP_a").val());
     valor_cambiar = $("#tmp_SP").val();
-    text1 ="<div class='container'><div class='row'><div class='col'></div><div class='col-3'><h3 class='text-warning'><strong>"+valor_anterior+" F°</strong></h3></div><div class='col-2'><i class='bi bi-box-arrow-right'></i></div><div class='col-3'><h3 class='text-success'><strong>"+valor_cambiar+" F°</strong></h3></div><div class='col'></div></div></div>"
-    sp_temp_esquema.innerHTML = text1; // sin peligro
+    //enviar ambos valores para procesar en interfaz dinamica
+    trama =valor_anterior+"|"+valor_cambiar+"|"+3;
+    const response = await fetch(base_url + "Control/ProcesarModal/"+trama, {method: "GET", });
+    const result = await response.json();
+    sp_temp_esquema.innerHTML =  result.data;// sin peligro
     $('#procesarTMP').modal('show');
 }
 function closeProcesarTmp(){
@@ -64,13 +60,15 @@ function closeProcesarTmp(){
     $('input[name=\'tmp_SP\']').val(spTemperatureInput[0]);
 }
 
-function procesarEthy(){
+async function procesarEthy(){
     //aqui enviar los datos al modal
     valor_anterior = parseInt($("#ethylene_SP_a").val());
     valor_cambiar = $("#ethylene_SP").val();
-    text1 ="<div class='container'><div class='row'><div class='col'></div><div class='col-3'><h3 class='text-warning'><strong>"+valor_anterior+" ppm</strong></h3></div><div class='col-2'><i class='bi bi-box-arrow-right'></i></div><div class='col-3'><h3 class='text-success'><strong>"+valor_cambiar+" ppm</strong></h3></div><div class='col'></div></div></div>"
-    sp_ety_esquema.innerHTML = text1; // sin peligro
-
+    //enviar ambos valores para procesar en interfaz dinamica
+    trama =valor_anterior+"|"+valor_cambiar+"|"+1;
+    const response = await fetch(base_url + "Control/ProcesarModal/"+trama, {method: "GET", });
+    const result = await response.json();
+    sp_ety_esquema.innerHTML = result.data; // sin peligro
     $('#procesarETHY').modal('show');
 }
 
@@ -80,13 +78,14 @@ function closeProcesarEthy(){
     $('input[name=\'ethylene_SP\']').val(spEthyleneInput[0]);
 }
 
-function procesarCO2(){
-    //aqui enviar los datos al modal
+async function procesarCO2(){
     valor_anterior = parseInt($("#co2_SP_a").val());
     valor_cambiar = $("#co2_SP").val();
-    text1 ="<div class='container'><div class='row'><div class='col'></div><div class='col-3'><h3 class='text-warning'><strong>"+valor_anterior+" %</strong></h3></div><div class='col-2'><i class='bi bi-box-arrow-right'></i></div><div class='col-3'><h3 class='text-success'><strong>"+valor_cambiar+" %</strong></h3></div><div class='col'></div></div></div>"
-    sp_co2_esquema.innerHTML = text1; // sin peligro
-
+    //enviar ambos valores para procesar en interfaz dinamica
+    trama =valor_anterior+"|"+valor_cambiar+"|"+2;
+    const response = await fetch(base_url + "Control/ProcesarModal/"+trama, {method: "GET", });
+    const result = await response.json();
+    sp_co2_esquema.innerHTML = result.data; // sin peligro
     $('#procesarCO2').modal('show');
 }
 
@@ -96,12 +95,17 @@ function closeProcesarCO2(){
     $('input[name=\'co2_SP\']').val(spCO2Input[0]);
 }
 
-function procesarHumidity(){
+async function procesarHumidity(){
     //aqui enviar los datos al modal
     valor_anterior = parseInt($("#humidity_SP_a").val());
     valor_cambiar = $("#humidity_SP").val();
-    text1 ="<div class='container'><div class='row'><div class='col'></div><div class='col-3'><h3 class='text-warning'><strong>"+valor_anterior+" %</strong></h3></div><div class='col-2'><i class='bi bi-box-arrow-right'></i></div><div class='col-3'><h3 class='text-success'><strong>"+valor_cambiar+" %</strong></h3></div><div class='col'></div></div></div>"
-    sp_humidity_esquema.innerHTML = text1; // sin peligro
+
+    //enviar ambos valores para procesar en interfaz dinamica
+    trama =valor_anterior+"|"+valor_cambiar+"|"+2;
+    const response = await fetch(base_url + "Control/ProcesarModal/"+trama, {method: "GET", });
+    const result = await response.json();
+
+    sp_humidity_esquema.innerHTML = result.data; // sin peligro
 
     $('#procesarHumidity').modal('show');
 }
@@ -112,13 +116,15 @@ function closeProcesarHumidity(){
     $('input[name=\'humidity_SP\']').val(spHumidityInput[0]);
 }
 
-function procesarIHours(){
+async function procesarIHours(){
     //aqui enviar los datos al modal
     valor_anterior = parseInt($("#i_hours_a").val());
     valor_cambiar = $("#i_hours").val();
-    text1 ="<div class='container'><div class='row'><div class='col'></div><div class='col-3'><h3 class='text-warning'><strong>"+valor_anterior+"h</strong></h3></div><div class='col-2'><i class='bi bi-box-arrow-right'></i></div><div class='col-3'><h3 class='text-success'><strong>"+valor_cambiar+" h</strong></h3></div><div class='col'></div></div></div>"
-    sp_hora_esquema.innerHTML = text1; // sin peligro
-
+    //enviar ambos valores para procesar en interfaz dinamica
+    trama =valor_anterior+"|"+valor_cambiar+"|"+4;
+    const response = await fetch(base_url + "Control/ProcesarModal/"+trama, {method: "GET", });
+    const result = await response.json();
+    sp_hora_esquema.innerHTML = result.data;  // sin peligro
     $('#procesarIHours').modal('show');
 }
 
@@ -159,29 +165,6 @@ function procesarData(){
         "<div class='d-flex justify-content-center gap-2'><button type='button' class='btn procesarTMP' style='background-color: #032338; color: white;' onclick='procesarTmp()'>Submit</button><button type='button' class='btn btn-danger closeTMP' onclick='closeProcesarTmp()'>Cancel</button></div>";
         $('#btnProcesarTMP').html(btnProcesarTMP);
     })
-    /*.on('touchspin.on.startupspin', function () {
-        let container = $('#tmp_SP').closest('.bootstrap-touchspin');
-        container.attr('id', 'tmp_SP_container');
-        container.find('.bootstrap-touchspin-up').attr('id', 'tmp_SP_up');
-        container.find('.bootstrap-touchspin-down').attr('id', 'tmp_SP_down');
-    });
-
-    $('#tmp_SP_up').click(function () {
-        alert('Hola');
-    });*/
-
-    /*
-    $('.bootstrap-touchspin-up').click(function () {
-        let buttonProcesarTMP = "<button type='button' class='btn' style='background-color: #032338; color: white;' onclick='procesarTemperatura()'>Procesar</button>";
-        let buttonProcesarEthy = "<button type='button' class='btn' style='background-color: #032338; color: white;' onclick='procesarEthy()'>Procesar</button>";
-       
-        $('#btnProcesarTMP').html(buttonProcesarTMP);
-        $('#btnProcesarEthy').html(buttonProcesarEthy);
-    });
-
-    $('.bootstrap_touchspin_down').click(function () {
-        alert('hola');
-    });*/
 
     $("#ethylene_SP").TouchSpin({
         min: 0,
@@ -238,9 +221,10 @@ function procesarData(){
     });
 
     $('input[name=\'i_hours\']').on("change",function(event){
-        let btnProcesarIHours = "<div class='d-flex justify-content-center gap-2'><button type='button' class='btn procesarIHours' style='background-color: #032338; color: white;' onclick='procesarIHours()'>Submit</button><button type='button' class='btn btn-danger closeIHours' onclick='closeProcesarIHours()'>Cancel</button></div>";
-        $('#btnProcesarIHours').html(btnProcesarIHours);
+        let ProcesarIHours = "<div class='d-flex justify-content-center gap-2'><button type='button' class='btn procesarIHours' style='background-color: #032338; color: white;' onclick='procesarIHours()'>Submit</button><button type='button' class='btn btn-danger closeIHours' onclick='closeProcesarIHours()'>Cancel</button></div>";
+        $('#btnProcesarIHours').html(ProcesarIHours);
     })
+        
 
     $('.clean_inputTMP').click(function () {  
         $('#tmp_SP').val(spTemperatureInput[0]);
@@ -279,6 +263,7 @@ document.addEventListener("DOMContentLoaded", async function(){
     try{
         const response = await fetch(base_url + "Control/ControlContent",{method: 'GET'});
         const data = await response.json();
+        console.log(data.data[0]);
         console.log(data.data[0].power_state);
         contenidoControl.innerHTML  =data.text;
         let select_power = document.getElementById('select_power');
@@ -306,7 +291,8 @@ document.addEventListener("DOMContentLoaded", async function(){
         let spTmp  = $('input[name=\'tmp_SP\']').val();
         let spEthy = $('input[name=\'ethylene_SP\']').val();
         let spCo2 = $('input[name=\'co2_SP\']').val();
-        if(spCo2 == 401){
+        //spCo2=0;
+        if(spCo2 >30 || spCo2<0){
             spCo2 = 'NA';
         }
         let spHumidity = $('input[name=\'humidity_SP\']').val();
@@ -368,194 +354,113 @@ function tarjeta(res){
 // FUNCIONES PARA HACER CAMBIO DE SET POINT
 async function btnProcesarTMP(){
     SP_Setpoint = $("#tmp_SP").val();
-    //procesar el comando 
-    const celsius = (SP_Setpoint - 32) * 5 / 9;
-    // Redondear al entero más cercano y retornar el resultado
-    fato_f = roundToDecimal(celsius,2);
-    trama = "Trama_Writeout(0,"+fato_f+",100)"
-    const response = await fetch(base_url + "Control/Comando/"+trama, {method: "GET", });
-    const result = await response.json();
-    analizar =JSON.parse(result) ;
-    if(analizar.estado==1){
-        acc = "success";
-        men = "loading...";
-
-    }else{
-        acc = "error";
-        men = "wait...";
+    if(SP_Setpoint){
+        trama =SP_Setpoint;
+        const response = await fetch(base_url + "Control/ComandoTemperatura/"+trama, {method: "GET", });
+        const result = await response.json();
+        analizar =JSON.parse(result.data) ;
+        mensaje =analizar.estado==1 ?  ["success",result.mensaje] :["error","control on standby, please wait ..."]
+        alertas(mensaje[1], mensaje[0]); 
+        setTimeout(function(){ window.location.href = base_url+"AdminPage";}, 2000);
     }
-    alertas(men, acc); 
-    $('#procesarTMP').modal('hide');
+
 }
 async function btnProcesarETHY(){
+    //$('.closepower').attr('hidden',true);
+    //$('.procesarpower').attr('hidden',true);
     SP_Setpoint = $("#ethylene_SP").val();
-    //procesar el comando 
-    trama = "SP_ETILENO("+SP_Setpoint+")";
-    const response = await fetch(base_url + "Control/Comando/"+trama, {method: "GET", });
-    const result = await response.json();
-    analizar =JSON.parse(result) ;
-    if(analizar.estado==1){
-        acc = "success";
-        men = "loading...";
-
-    }else{
-        acc = "error";
-        men = "wait...";
+    if(SP_Setpoint){
+        trama =SP_Setpoint;
+        const response = await fetch(base_url + "Control/ComandoEthy/"+trama, {method: "GET", });
+        const result = await response.json();
+        analizar =JSON.parse(result.data) ;
+        mensaje =analizar.estado==1 ?  ["success",result.mensaje] :["error","control on standby, please wait ..."]
+        alertas(mensaje[1], mensaje[0]); 
+        setTimeout(function(){ window.location.href = base_url+"AdminPage";}, 2000);
     }
-    alertas(men, acc); 
-    $('#procesarETHY').modal('hide');
 }
 
 async function btnProcesarCO2(){
     SP_Setpoint = $("#co2_SP").val();
-    //procesar el comando 
-    trama = "Trama_Writeout(3,"+SP_Setpoint+",100)";
-    trama2 ="Trama_Writeout(9,2,1)";
-    trama =trama+"|"+trama2;
-    const response = await fetch(base_url + "Control/Comandoco2/"+trama, {method: "GET", });
-    const result = await response.json();
-    analizar =JSON.parse(result) ;
-    if(analizar.estado==1){
-        acc = "success";
-        men = "loading...";
-
-    }else{
-        acc = "error";
-        men = "wait...";
+    if(SP_Setpoint){
+        trama =SP_Setpoint;
+        const response = await fetch(base_url + "Control/CO2Comando/"+trama, {method: "GET", });
+        const result = await response.json();
+        analizar =JSON.parse(result.data) ;
+        mensaje =analizar.estado==1 ?  ["success",result.mensaje] :["error","control on standby, please wait ..."]
+        alertas(mensaje[1], mensaje[0]); 
+        setTimeout(function(){ window.location.href = base_url+"AdminPage";}, 2000);
     }
-    alertas(men, acc); 
-    $('#procesarCO2').modal('hide');
 
 }
 
 async function btnProcesarHumidity(){
     SP_Setpoint = $("#humidity_SP").val();
-    //procesar el comando 
-    trama = "Trama_Writeout(4,"+SP_Setpoint+",100)"
-
-    const response = await fetch(base_url + "Control/Comando/"+trama, {method: "GET", });
-    const result = await response.json();
-    analizar =JSON.parse(result) ;
-    if(analizar.estado==1){
-        acc = "success";
-        men = "loading...";
-
-    }else{
-        acc = "error";
-        men = "wait...";
+    if(SP_Setpoint){
+        trama =SP_Setpoint;
+        const response = await fetch(base_url + "Control/ComandoHumedad/"+trama, {method: "GET", });
+        const result = await response.json();
+        analizar =JSON.parse(result.data) ;
+        mensaje =analizar.estado==1 ?  ["success",result.mensaje] :["error","control on standby, please wait ..."]
+        alertas(mensaje[1], mensaje[0]); 
+        setTimeout(function(){ window.location.href = base_url+"AdminPage";}, 2000);
     }
-    alertas(men, acc); 
-    $('#procesarHumidity').modal('hide');
-
 }
-async function btnProcesarIHours(){
+async function btnprocesarIHours(){
     SP_Setpoint = $("#i_hours").val();
     sp_sp_ethy1 = $("#ethylene_SP").val();
-
-    //procesar el comando 
-    trama = "Temporizadores(0,"+SP_Setpoint+","+sp_sp_ethy1+")";
-
-    const response = await fetch(base_url + "Control/Comando/"+trama, {method: "GET", });
-    const result = await response.json();
-    analizar =JSON.parse(result) ;
-    if(analizar.estado==1){
-        acc = "success";
-        men = "loading...";
-
-    }else{
-        acc = "error";
-        men = "wait...";
+    console.log(SP_Setpoint);
+    if(SP_Setpoint){
+        trama =SP_Setpoint+"|"+sp_sp_ethy1;
+        console.log(trama);
+        const response = await fetch(base_url + "Control/ComandoHoras/"+trama, {method: "GET", });
+        const result = await response.json();
+        analizar =JSON.parse(result.data) ;
+        mensaje =analizar.estado==1 ?  ["success",result.mensaje] :["error","control on standby, please wait ..."]
+        alertas(mensaje[1], mensaje[0]); 
+        setTimeout(function(){ window.location.href = base_url+"AdminPage";}, 2000);
     }
-    alertas(men, acc); 
-    $('#procesarIHours').modal('hide');
-
 }
 async function procesarPower(){
     $('.closepower').attr('hidden',true);
     $('.procesarpower').attr('hidden',true);
     if(  select_power.value !=elpower_state[0]){
-        console.log(select_power.value);
-        console.log(elpower_state[0]);
-        if(select_power.value=="0"){
-            //trama = "RELE3_OFF";
-            trama="Trama_Writeout(29,0,1)";
-            elpower_state[0]="0";
-        }else{
-            //trama = "RELE3_ON";
-            trama = "Trama_Writeout(29,1,1)";
-            elpower_state[0]="1";
-        }
-        const response = await fetch(base_url + "Control/Comando/"+trama, {method: "GET", });
+        elpower_state[0]=select_power.value=="0" ? "0":"1";
+        trama =select_power.value=="0" ?"OFF":"ON";
+        const response = await fetch(base_url + "Control/ComandoPower/"+trama, {method: "GET", });
         const result = await response.json();
-        analizar =JSON.parse(result) ;
-        if(analizar.estado==1){
-            acc = "success";
-            men = "loading...";
-        }else{
-            acc = "error";
-            men = "wait...";
-        }
-    }else{
-        acc = "error";
-        men = "repeated ...";
+        analizar =JSON.parse(result.data) ;
+        mensaje =analizar.estado==1 ?  ["success",result.mensaje] :["error","control on standby, please wait ..."]
+        alertas(mensaje[1], mensaje[0]); 
+        setTimeout(function(){ window.location.href = base_url+"AdminPage";}, 2000);
     }
-    alertas(men, acc); 
 }
 
 async function procesarAVL(){
-    $('.closeavl').attr('hidden',true);
-    $('.procesaravl').attr('hidden',true);
-
-    if(  select_avl_ok.value !=elavl[0]){
-        console.log(select_avl_ok.value);
-        console.log(elavl[0]);
-        if(select_avl_ok.value=="0"){
-            trama = "Trama_Writeout(9,0,1)";
-            elavl[0]="0";
-            const response = await fetch(base_url + "Control/Comando/"+trama, {method: "GET", });
-            const result = await response.json();
-            analizar =JSON.parse(result) ;
-
-
-        }else{
-            trama = "Trama_Writeout(5,200,1)";
-            trama2 ="Trama_Writeout(9,1,1)";
-            trama =trama2+"|"+trama;
-            elavl[0]="1";
-            const response = await fetch(base_url + "Control/Comandoco2/"+trama, {method: "GET", });
-            const result = await response.json();
-            analizar =JSON.parse(result) ;
-        }
-        if(analizar.estado==1){
-            acc = "success";
-            men = "loading...";
-        }else{
-            acc = "error";
-            men = "wait...";
-        }
-    }else{
-        acc = "error";
-        men = "repeated ...";
+    if(select_avl_ok.value !=elavl[0]){
+        trama =select_avl_ok.value=="0"?  "NO" : "FULL";
+        elavl[0] =select_avl_ok.value=="0"?  "0" : "1";
+        //trama =SP_Setpoint;
+        console.log(trama);
+        const response = await fetch(base_url + "Control/AVLOK/"+trama, {method: "GET", });
+        const result = await response.json();
+        analizar =JSON.parse(result.data) ;
+        mensaje =analizar.estado==1 ?  ["success",result.mensaje] :["error","control on standby, please wait ..."]
+        alertas(mensaje[1], mensaje[0]); 
+        setTimeout(function(){ window.location.href = base_url+"AdminPage";}, 2000);
     }
-    alertas(men, acc); 
 }
 
-
 async function defrost_p_ok(){
-    //procesar el comando 
-    trama = "Trama_Writeout(21,0,0)";
-    const response = await fetch(base_url + "Control/Comando/"+trama, {method: "GET", });
-    const result = await response.json();
-    analizar =JSON.parse(result) ;
-    if(analizar.estado==1){
-        acc = "success";
-        men = "loading...";
-
-    }else{
-        acc = "error";
-        men = "wait...";
+    SP_Setpoint="OK";
+    if(SP_Setpoint){
+        trama =SP_Setpoint;
+        console.log(trama);
+        const response = await fetch(base_url + "Control/DefrostOK/"+trama, {method: "GET", });
+        const result = await response.json();
+        analizar =JSON.parse(result.data) ;
+        mensaje =analizar.estado==1 ?  ["success",result.mensaje] :["error","control on standby, please wait ..."]
+        alertas(mensaje[1], mensaje[0]); 
+        setTimeout(function(){ window.location.href = base_url+"AdminPage";}, 2000);
     }
-    alertas(men, acc); 
-    console.log(trama);
-
 }

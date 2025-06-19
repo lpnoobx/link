@@ -29,7 +29,8 @@ class ControlModel extends Query{
     {
         $ch = curl_init();
         $data =json_encode($data);
-        curl_setopt($ch, CURLOPT_URL, "http://161.132.206.104:9050/Comandos/");
+        #curl_setopt($ch, CURLOPT_URL, "http://161.132.206.104:9050/Comandos/");
+        curl_setopt($ch, CURLOPT_URL, "http://161.132.53.51:9050/TermoKing/comando/");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -42,9 +43,26 @@ class ControlModel extends Query{
     {
         $ch = curl_init();
         $data =json_encode($data);
-        curl_setopt($ch, CURLOPT_URL, "http://161.132.206.104:9050/Comandos/libre/");
+        #curl_setopt($ch, CURLOPT_URL, "http://161.132.206.104:9050/Comandos/libre/");
+        curl_setopt($ch, CURLOPT_URL, "http://161.132.53.51:9050/Comandos/libre/");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $res = curl_exec($ch);
+        curl_close($ch);   
+        return $res;
+    }
+    public function ComandosTest($data){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, urlapiMongo2."/Comandos/buscar/testapi/".$data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $res = curl_exec($ch);
+        curl_close($ch);   
+        return $res;
+    }
+    public function ComandosOficial($data){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "http://161.132.53.51:9050/Comandos/buscar/oficial/dexterity/".$data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $res = curl_exec($ch);
         curl_close($ch);   

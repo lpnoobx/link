@@ -43,11 +43,6 @@
                                         <th>Return Air</th>
                                         <th>Temp Supply</th>
                                         <th>Relative Humidity</th>
-                                        <th>Co2</th>
-                                        <th>Cargo 1</th>
-                                        <th>Cargo 2</th>
-                                        <th>Cargo 3</th>
-                                        <th>Cargo 4</th>
                                         <th>Ambient Air</th>
                                         <th>Evaporation Coil</th>
                                         <th>Compresor</th>

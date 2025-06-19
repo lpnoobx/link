@@ -65,7 +65,7 @@
                     <!--<i class="bi bi-wind"></i>-->
                     <i class="ri-settings-3-fill"></i>
 
-                    <span class="text-uppercase">Automatic Control </span>
+                    <span class="text-uppercase">Cycle Control </span>
                 </a>
             </li>
             <li class="sidebar-item">
