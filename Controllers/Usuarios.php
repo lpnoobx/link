@@ -111,7 +111,7 @@ class Usuarios extends Controller{
                 //aqui debemos especificar  la empresa_id referencial 
                 //$_SESSION['empresa_id'] = isset($resultadoUser->empresa_id) ? $resultadoUser->empresa_id : 0 ;
                 #$_SESSION['empresa_id'] = 77;
-                $_SESSION['empresa_id'] = 71;
+                $_SESSION['empresa_id'] = 85;
 
                 // establecer parametros de los equipos asignados a telemetria para actualizacion automatica
                 $ExtraerDatos = $this->model->ExtraerDatos_api($_SESSION['empresa_id']);

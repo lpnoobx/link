@@ -101,7 +101,7 @@ function estadoEquipo(){
     console.log(estado);
     //aqui pusisite estatico el id_telemetria obligando a se tenga que modificar 
     //let ultima_fecha = document.getElementById('fechita_4638');
-    let ultima_fecha = document.getElementById('fechita_15056');
+    let ultima_fecha = document.getElementById('fechita_15681');
 
     console.log(ultima_fecha);
     //sweetAlert

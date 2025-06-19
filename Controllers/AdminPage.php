@@ -136,6 +136,7 @@ class AdminPage extends Controller
                     $dat->cargo_2_temp =tempNormal($dat->cargo_2_temp) ; 
                     $dat->cargo_3_temp =tempNormal($dat->cargo_3_temp) ; 
                     $dat->cargo_4_temp =tempNormal($dat->cargo_4_temp) ; 
+                    
                     $d++;
                 }
             }

@@ -97,11 +97,12 @@
         return $dif;
 
     }
-
+/*
 function tempNormal($val){
     return $val;
 }
-/*
+    */
+
 function tempNormal($val){ 
     // Verificar si el valor está dentro del rango permitido
     if($val < -40 || $val > 120) {
@@ -124,7 +125,7 @@ function tempNormal($val){
         $valor="NA";
     }
     return $valor;
-}*/
+}
 function porcentajeCo2($val){
     //$val= 0.9;
     if($val >= 0 && $val <= 100){
@@ -323,7 +324,7 @@ function ContenedorMadurador_2($val, $url=0){
     $co2 = $val->co2_reading;
     $sp_co2 = $val->set_point_co2;
     $supply = $val->temp_supply_1;
-    $s_temp = $val->set_point;
+    //$s_temp = $val->set_point;
 
     // sp_ethyleno y etileno
     if(abs($etileno - $sp_ethyleno) <= $sp_ethyleno * 0.10){
@@ -367,12 +368,12 @@ function ContenedorMadurador_2($val, $url=0){
         $icon = "text-danger";
         $textState = "OFF";
     }
-    $temp_supply_1_f= $val->temp_supply_1;
-    $return_air_f = $val->return_air;
+    $temp_supply_1_f= tempNormal($val->temp_supply_1);
+    $return_air_f = tempNormal($val->return_air);
     $avl_f = avl_1($val->avl);
-    $compress_coil_1_f = $val->compress_coil_1;
-    $evaporation_coil_f = $val->evaporation_coil;
-    $ambient_air_f = $val->ambient_air;
+    $compress_coil_1_f = tempNormal($val->compress_coil_1);
+    $evaporation_coil_f = tempNormal($val->evaporation_coil);
+    $ambient_air_f = tempNormal($val->ambient_air);
     $cargo_1_temp_f = evl_usda($val->cargo_1_temp);
     $cargo_2_temp_f = evl_usda($val->cargo_2_temp);
     $cargo_3_temp_f = evl_usda($val->cargo_3_temp);
@@ -466,7 +467,7 @@ function ContenedorMadurador_2($val, $url=0){
                                 <h4 class='text-uppercase text_params'>Return</h4>
                                 <div class='d-flex justify-content-center align-content-center'>
                                     <p class='value-icon' id='return_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                    <label for='return' class='fw-bold value_params value_icon' id='return_{$val->telemetria_id}'>{$return_air_f} C°</label>
+                                    <label for='return' class='fw-bold value_params value_icon' id='return_{$val->telemetria_id}'>{$return_air_f} F°</label>
                                 </div>
                             </div>
                         </div>
@@ -492,7 +493,7 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>Supply</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='supply_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='supply' class='fw-bold value_icon value_params {$supply_color}' id='supply_{$val->telemetria_id}'>{$temp_supply_1_f} C°</label>
+                                <label for='supply' class='fw-bold value_icon value_params {$supply_color}' id='supply_{$val->telemetria_id}'>{$temp_supply_1_f} F°</label>
                             </div>
                         </div>
                     </div>
@@ -504,7 +505,7 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>Set Point</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='set_point_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label class='fw-bold value_icon value_params' id='set_point_{$val->telemetria_id}'>{$s_temp} C°</label>
+                                <label class='fw-bold value_icon value_params' id='set_point_{$val->telemetria_id}'>{$s_temp} F°</label>
                             </div>
                         </div>
                     </div>
@@ -604,7 +605,7 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>USDA 1</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='usda_1_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='usda_1' class='fw-bold value_params value_icon' id='usda_1_{$val->telemetria_id}'>{$cargo_1_temp_f} C°</label>
+                                <label for='usda_1' class='fw-bold value_params value_icon' id='usda_1_{$val->telemetria_id}'>{$cargo_1_temp_f} F°</label>
                             </div>
                         </div>
                     </div>
@@ -614,7 +615,7 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>USDA 2</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='usda_2_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='usda_2' class='fw-bold value_params value_icon' id='usda_2_{$val->telemetria_id}'>{$cargo_2_temp_f} C°</label>
+                                <label for='usda_2' class='fw-bold value_params value_icon' id='usda_2_{$val->telemetria_id}'>{$cargo_2_temp_f} F°</label>
                             </div>
                         </div>
                     </div>
@@ -624,7 +625,7 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>USDA 3</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='usda_3_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='usda_3' class='fw-bold value_params value_icon' id='usda_3_{$val->telemetria_id}'>{$cargo_3_temp_f} C°</label>
+                                <label for='usda_3' class='fw-bold value_params value_icon' id='usda_3_{$val->telemetria_id}'>{$cargo_3_temp_f} F°</label>
                             </div>
                         </div>
                     </div>
@@ -634,7 +635,7 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>USDA 4</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='usda_4_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='usda_4' class='fw-bold value_params value_icon' id='usda_4_{$val->telemetria_id}'>{$cargo_4_temp_f} C°</label>
+                                <label for='usda_4' class='fw-bold value_params value_icon' id='usda_4_{$val->telemetria_id}'>{$cargo_4_temp_f} F°</label>
                             </div>
                         </div>
                     </div>
@@ -644,7 +645,7 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>Evaporator</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='evaporator_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='evaporator' class='fw-bold value_params value_icon' id='evaporator_{$val->telemetria_id}'>{$evaporation_coil_f} C°</label>
+                                <label for='evaporator' class='fw-bold value_params value_icon' id='evaporator_{$val->telemetria_id}'>{$evaporation_coil_f} F°</label>
                             </div>
                         </div>
                     </div>
@@ -680,7 +681,7 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>Compressor</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='compressor_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='compressor' class='fw-bold value_params value_icon' id='compressor_{$val->telemetria_id}'>{$val->compress_coil_1} C°</label>
+                                <label for='compressor' class='fw-bold value_params value_icon' id='compressor_{$val->telemetria_id}'>{$evaporation_coil_f} F°</label>
                             </div>
                         </div>
                     </div>
@@ -690,7 +691,7 @@ function ContenedorMadurador_2($val, $url=0){
                             <h4 class='text-uppercase text_params'>Ambient Air</h4>
                             <div class='d-flex justify-content-center align-content-center'>
                                 <p class='value-icon' id='ambient_air_icon_{$val->telemetria_id}'><i class='bi bi-arrows me-2 align-items-center mb-1 text-primary value-icon'></i></p>
-                                <label for='ambient_air' class='fw-bold value_params value_icon' id='ambient_air_{$val->telemetria_id}'>{$ambient_air_f}</label>
+                                <label for='ambient_air' class='fw-bold value_params value_icon' id='ambient_air_{$val->telemetria_id}'>{$ambient_air_f}F°</label>
                             </div>
                         </div>
                     </div>
