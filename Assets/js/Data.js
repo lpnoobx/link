@@ -126,7 +126,7 @@ async function procesarFecha_2(){
     if(fechaInicialx==''|| fechaFinx==''){alert("No se seleccionado las fechas");
     }else{
         console.log("vamos a analizar");
-        conj= contenedor+"/"+"15056"+"/"+fechaInicialx+"/"+fechaFinx;
+        conj= contenedor+"/"+"15681"+"/"+fechaInicialx+"/"+fechaFinx;
         console.log(conj);
         if(fechaInicialx!=todo.date[0] || fechaFinx!=todo.date[1]){
             $(".loader").show();
@@ -199,7 +199,7 @@ async function jajaja() {
         const cabecera = await base64_Header();
         const pie_de_pagina = await base64_Footer();
         //let conj = contenedor + "/"+"14872";
-        let conj = contenedor + "/"+"15056";
+        let conj = contenedor + "/"+"15681";
 
         //const url = base_url + "Data/GraficaInicial/" + conj;
         const response1 = await fetch(base_url + "Data/GraficaInicial/"+conj, {method: "GET", });

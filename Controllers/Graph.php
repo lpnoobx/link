@@ -98,6 +98,7 @@ class Graph extends Controller
                 $dataMadurador = $this->model->DatosGraficaTabla($cadena);
                 $resultadoMadurador = json_decode($dataMadurador);
                 $resultadoMadurador = $resultadoMadurador->data;
+                $resultadoMadurador->jeje=$cadena;
             }else{
                 $resultadoMadurador =fechaGrafica($fechaI,$fechaF);
             }
